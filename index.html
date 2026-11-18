@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SchoolWatt Solutions | BIM-Based Smart Energy Monitoring for Schools</title>
+<meta name="description" content="SchoolWatt links IoT energy readings to a BIM building model so school facility teams can see where electricity is used.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%230E3B2E'/%3E%3Cpath d='M22 8l-9 14h7l-2 10 10-15h-7z' fill='%23F5B301'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="logo" viewBox="0 0 40 40"><rect width="40" height="40" rx="10" fill="#0E3B2E"/><path d="M8 32V16l12-7 12 7v16z" fill="none" stroke="#8CC9A8" stroke-width="2" stroke-linejoin="round"/><path d="M22 11l-8 12h6l-2 9 9-13h-6z" fill="#F5B301"/></symbol></svg>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#home" aria-label="SchoolWatt home"><svg width="34" height="34"><use href="#logo"/></svg><span>School<b>Watt</b></span></a>
+    <button id="navToggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <nav id="navLinks" class="links">
+      <a href="#about">About</a><a href="#technology">Technology</a><a href="#calculator">Calculator</a><a href="#dashboard">Dashboard</a><a href="#bim">3D Model</a><a href="#roadmap">Roadmap</a><a href="#pricing">Pricing</a>
+      <a class="btn sm" href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section id="home" class="hero">
+  <div class="wrap hero-in">
+    <div>
+      <p class="tag">Proposed system · Provisional TRL 2</p>
+      <h1>See where your school’s electricity goes, room by room.</h1>
+      <p class="lead">SchoolWatt links IoT energy readings to a BIM building model, so facility teams can find which zones use the most power and decide what to inspect first.</p>
+      <div class="cta"><a class="btn amber" href="#dashboard">Explore the demo dashboard</a><a class="btn ghost" href="#about">How it works</a></div>
+    </div>
+    <aside class="hero-card" aria-label="Sample zone breakdown">
+      <div class="hc-top"><div><small>Main School Building · sample month</small><strong>12,000 kWh</strong></div><span class="pill warn">Simulated</span></div>
+      <div id="heroZones"></div>
+    </aside>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <h2>A bill shows the total. Schools need the breakdown.</h2>
+    <div class="two">
+      <p class="big">A monthly electricity bill rarely shows how consumption splits across classrooms, laboratories, offices and air-conditioning. SchoolWatt places selected meter readings on a digital model of the building, so a reading is tied to a real space and can be compared, trended and reported.</p>
+      <div class="yn">
+        <div><h3>SchoolWatt does</h3><ul><li>Measure selected circuits and equipment</li><li>Map each reading to a BIM space or asset</li><li>Flag unusual patterns and missing data</li><li>Produce traceable monthly reports</li></ul></div>
+        <div><h3>SchoolWatt does not</h3><ul><li>Cut electricity use automatically</li><li>Control breakers or protection settings</li><li>Claim savings before they are measured</li><li>Replace qualified electrical personnel</li></ul></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="technology" class="alt">
+  <div class="wrap">
+    <h2>From meter to decision in five steps</h2>
+    <p class="sub">Each record carries a meter ID, timestamp, value, unit, quality flag and the building space it belongs to.</p>
+    <ol class="flow">
+      <li><b>Meters and sensors</b><span>Measure kWh, kW, voltage, current and power factor at selected points.</span></li>
+      <li><b>IoT gateway</b><span>Sends readings securely over the school’s approved network.</span></li>
+      <li><b>Data platform</b><span>Validates, timestamps, stores and flags missing or stale data.</span></li>
+      <li><b>BIM mapping</b><span>Links each meter ID to a space or asset in the building model.</span></li>
+      <li><b>Dashboard</b><span>Shows trends, zone comparisons, alerts and reports to authorized staff.</span></li>
+    </ol>
+    <div class="safe">
+      <div><b>Role-based access</b><span>Staff see only what their role allows.</span></div>
+      <div><b>Encrypted transfer</b><span>Secure transmission, backups and audit logs.</span></div>
+      <div><b>Qualified installers</b><span>Live electrical work by licensed personnel only.</span></div>
+      <div><b>Privacy by design</b><span>Building and energy data, not student records.</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="calculator">
+  <div class="wrap">
+    <h2>School energy calculator</h2>
+    <p class="sub">Enter your building’s figures. Results update as you type and feed the dashboard below.</p>
+    <div class="calc">
+      <div class="card">
+        <label for="area">Building area (m²)</label><input id="area" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 5000">
+        <label for="usage">Monthly consumption (kWh)</label><input id="usage" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 12000">
+        <label for="rate">Electricity rate (₱/kWh)</label><input id="rate" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 12">
+        <p id="calcHint" class="hint" role="status">Enter all three values to see results.</p>
+        <button class="btn" id="useSample" type="button">Use sample values</button>
+      </div>
+      <div class="card results">
+        <div class="r big"><span>Estimated monthly bill</span><b id="rBill">—</b></div>
+        <div class="r big"><span>Energy use intensity</span><b id="rEUI">—</b></div>
+        <div class="r"><span>Annual consumption</span><b id="rYear">—</b></div>
+        <div class="r"><span>Annual cost</span><b id="rYearCost">—</b></div>
+        <div class="r"><span>Average per day</span><b id="rDay">—</b></div>
+        <div class="r"><span>Monthly cost per m²</span><b id="rSqm">—</b></div>
+      </div>
+    </div>
+    <div class="card sim">
+      <div><h3>Savings simulator</h3><p class="muted">Drag to see what a given reduction would be worth. This is an illustration, not a promise: real savings must be measured against a baseline.</p></div>
+      <div class="sim-ctl"><label for="cut">Energy reduction: <b id="cutVal">10%</b></label><input id="cut" type="range" min="0" max="50" step="1" value="10"></div>
+      <div class="sim-out"><div class="r"><span>Monthly savings</span><b id="sMonth">—</b></div><div class="r"><span>Annual savings</span><b id="sYear">—</b></div><div class="r"><span>New monthly bill</span><b id="sNew">—</b></div></div>
+      <p id="sNote" class="hint"></p>
+    </div>
+  </div>
+</section>
+
+<section id="dashboard" class="alt">
+  <div class="wrap">
+    <h2>Demo dashboard</h2>
+    <p class="sub">A concept demonstration of the proposed interface. All values are simulated, not live sensor readings.</p>
+    <div class="dash">
+      <div class="dash-top">
+        <div class="dash-id"><svg width="30" height="30"><use href="#logo"/></svg><div><strong>Main School Building</strong><small id="dashArea">5,000 m² · Demonstration mode</small></div></div>
+        <div class="tabs" role="tablist">
+          <button role="tab" class="tab" data-tab="overview" aria-selected="true">Overview</button>
+          <button role="tab" class="tab" data-tab="campus" aria-selected="false">Campus</button>
+          <button role="tab" class="tab" data-tab="forecast" aria-selected="false">Forecast</button>
+        </div>
+      </div>
+
+      <div id="pane-overview" class="pane">
+        <div class="kpis">
+          <div class="kpi"><span>Energy consumption</span><b id="kEnergy">12,000 kWh</b><small>This month</small></div>
+          <div class="kpi"><span>Estimated bill</span><b id="kBill">₱144,000.00</b><small>At the current rate</small></div>
+          <div class="kpi"><span>Energy use intensity</span><b id="kEUI">2.40</b><small>kWh/m²/month</small></div>
+          <div class="kpi"><span>Consumption level</span><b id="kLevel"><i class="pill ok">Normal</i></b><small>Illustrative thresholds: 3 and 5</small></div>
+          <div class="kpi"><span>Data completeness</span><b>98.6%</b><small>Received ÷ expected readings</small></div>
+          <div class="kpi"><span>Meters online</span><b>11 of 12</b><small>1 meter flagged stale</small></div>
+        </div>
+        <div class="panel"><div class="ph"><h3>Consumption by zone</h3><span class="pill warn">Illustrative split</span></div><div id="zones"></div></div>
+        <div class="panel"><div class="ph"><h3>Monthly energy report</h3>
+          <div class="acts"><button class="btn sm ghost-d" id="exportCsv">Export CSV</button><button class="btn sm ghost-d" id="printBtn">Print</button></div></div>
+          <div class="rep"><div><small>Period</small><b id="repMonth">—</b></div><div><small>Energy</small><b id="repEnergy">—</b></div><div><small>Cost</small><b id="repBill">—</b></div><div><small>EUI</small><b id="repEUI">—</b></div></div>
+          <p id="repNote" class="hint">Demonstration report using simulated energy data.</p>
+          <button class="btn" id="loadDemo">Reset to sample data</button></div>
+      </div>
+
+      <div id="pane-campus" class="pane" hidden>
+        <div class="kpis four" id="campusStats"></div>
+        <div class="panel"><div class="ph"><h3>Building performance</h3><span class="pill warn">Sample data</span></div><div id="bldgs" class="bldgs"></div></div>
+        <div class="panel"><h3>Campus insights</h3><div id="insights" class="ins"></div><div class="action"><b>Recommended action</b><p id="action"></p></div></div>
+      </div>
+
+      <div id="pane-forecast" class="pane" hidden>
+        <div class="kpis four" id="fStats"></div>
+        <div class="panel"><div class="ph"><h3>Six months of history and a six-month projection</h3><span class="pill warn">Simulated</span></div>
+          <div id="vchart" class="vchart"></div>
+          <div class="legend"><span><i class="sw"></i>History</span><span><i class="sw f"></i>Projection</span></div></div>
+        <div class="panel"><h3>Projection table</h3><div class="scroll"><table><thead><tr><th>Month</th><th>Projected consumption</th><th>Estimated cost</th></tr></thead><tbody id="ftable"></tbody></table></div>
+          <p class="hint">Linear trend of the six simulated months. Actual results depend on occupancy, weather, equipment and schedules.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="bim">
+  <div class="wrap">
+    <h2>3D building viewer</h2>
+    <p class="sub">Rotate, zoom and click floors or rooms to see simulated energy use. Colors follow the dashboard thresholds: green is normal, orange is high, red is very high.</p>
+    <div class="bim">
+      <div class="bim-stage">
+        <div class="bim-bar" id="bimBuildings" role="group" aria-label="Select building">
+          <button class="chip" data-b="main" aria-pressed="true">Main Building</button>
+          <button class="chip" data-b="eng" aria-pressed="false">Engineering Building</button>
+          <button class="chip" data-b="admin" aria-pressed="false">Administration Building</button>
+          <button class="chip" data-b="lib" aria-pressed="false">Library</button>
+        </div>
+        <div id="bimCanvas" aria-label="Interactive 3D model of the selected school building"></div>
+        <div class="bim-bar bottom">
+          <div id="bimFloors" class="bim-grp" role="group" aria-label="Select floor"></div>
+          <div class="bim-grp" id="bimViews" role="group" aria-label="Camera view">
+            <button class="chip sm" data-v="iso">Isometric</button><button class="chip sm" data-v="front">Front</button><button class="chip sm" data-v="side">Side</button><button class="chip sm" data-v="top">Top</button><button class="chip sm" data-v="reset">Reset</button>
+          </div>
+        </div>
+        <p class="bim-hint">Drag to rotate · scroll or pinch to zoom · click a room or a floor slab</p>
+      </div>
+      <aside class="bim-info card" id="bimInfo" aria-live="polite"></aside>
+    </div>
+    <p class="hint">This is a simulated BIM-style visualization built with Three.js. It is not a Revit model, and all room data and energy values are simulated.</p>
+  </div>
+</section>
+
+<section id="roadmap">
+  <div class="wrap">
+    <h2>Where the project stands</h2>
+    <p class="sub">SchoolWatt is currently at provisional Technology Readiness Level 2: the concept is formulated, and no integrated prototype has been tested yet. Each phase must pass its gate before the next begins.</p>
+    <ol class="road">
+      <li class="done"><b>Requirements and feasibility</b><span>Month 1</span></li>
+      <li class="done"><b>Concept and detailed design</b><span>Months 2–3</span></li>
+      <li><b>Proof of concept</b><span>Months 4–5 · TRL 3</span></li>
+      <li><b>Integrated lab prototype</b><span>Months 6–7 · TRL 4</span></li>
+      <li><b>Relevant-environment testing</b><span>Months 8–9 · TRL 5</span></li>
+      <li><b>Controlled school pilot</b><span>Months 10–12</span></li>
+      <li><b>Commercial preparation</b><span>After the pilot</span></li>
+    </ol>
+  </div>
+</section>
+
+<section id="pricing" class="alt">
+  <div class="wrap">
+    <h2>Proposed subscription plans</h2>
+    <p class="sub">Indicative monthly fees. Final quotations depend on device count, monitored points, BIM model condition and support scope.</p>
+    <div class="plans">
+      <div class="plan"><h3>Basic</h3><p class="price">₱12,000<small>/month</small></p><ul><li>Limited monitoring points</li><li>Standard dashboard</li><li>Basic monthly report</li><li>Standard support</li></ul></div>
+      <div class="plan feat"><h3>Standard</h3><p class="price">₱18,000<small>/month</small></p><ul><li>Expanded monitoring coverage</li><li>BIM-linked building views</li><li>Trend analysis</li><li>Periodic consultation</li></ul></div>
+      <div class="plan"><h3>Premium</h3><p class="price">₱25,000<small>/month</small></p><ul><li>Broader monitoring coverage</li><li>Enhanced analytics</li><li>Priority support</li><li>Detailed reporting</li></ul></div>
+    </div>
+    <p class="hint">Setup, audits, consulting and maintenance are quoted separately.</p>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="wrap">
+    <h2>Interested in a pilot for your school?</h2>
+    <p class="lead">Tell us about your buildings and we will outline a limited pilot with agreed scope, data rules and evaluation criteria.</p>
+    <a class="btn amber" href="mailto:schoolwattsolutions@gmail.com?subject=SchoolWatt%20pilot%20inquiry">schoolwattsolutions@gmail.com</a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div class="brand"><svg width="30" height="30"><use href="#logo"/></svg><span>School<b>Watt</b> Solutions</span></div>
+    <p>BIM-Based Smart Energy Monitoring System for Schools<br>Engineering &amp; Technopreneurship project · BS Mechanical Engineering · University of Perpetual Help System Dalta</p>
+    <p>© 2026 SchoolWatt Solutions. Proposed concept; figures shown are illustrative.</p>
+  </div>
+</footer>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script src="https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
