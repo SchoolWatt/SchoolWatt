@@ -34,7 +34,7 @@
       <div class="cta"><a class="btn amber" href="#dashboard">Explore the demo dashboard</a><a class="btn ghost" href="#about">How it works</a></div>
     </div>
     <aside class="hero-card" aria-label="Sample zone breakdown">
-      <div class="hc-top"><div><small>Main School Building · sample month</small><strong>12,000 kWh</strong></div><span class="pill warn">Simulated</span></div>
+      <div class="hc-top"><div><small>Main Building · sample month</small><strong>20,000 kWh</strong></div><span class="pill warn">Simulated</span></div>
       <div id="heroZones"></div>
     </aside>
   </div>
@@ -76,12 +76,12 @@
 <section id="calculator">
   <div class="wrap">
     <h2>School energy calculator</h2>
-    <p class="sub">Enter your building’s figures. Results update as you type and feed the dashboard below.</p>
+    <p class="sub">Enter the figures a smart meter would normally supply. Results update as you type and drive the dashboard, forecast and 3D Main Building below.</p>
     <div class="calc">
       <div class="card">
         <label for="area">Building area (m²)</label><input id="area" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 5000">
-        <label for="usage">Monthly consumption (kWh)</label><input id="usage" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 12000">
-        <label for="rate">Electricity rate (₱/kWh)</label><input id="rate" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 12">
+        <label for="usage">Monthly consumption (kWh)</label><input id="usage" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 20000">
+        <label for="rate">Electricity rate (₱/kWh)</label><input id="rate" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 15">
         <p id="calcHint" class="hint" role="status">Enter all three values to see results.</p>
         <button class="btn" id="useSample" type="button">Use sample values</button>
       </div>
@@ -109,7 +109,7 @@
     <p class="sub">A concept demonstration of the proposed interface. All values are simulated, not live sensor readings.</p>
     <div class="dash">
       <div class="dash-top">
-        <div class="dash-id"><svg width="30" height="30"><use href="#logo"/></svg><div><strong>Main School Building</strong><small id="dashArea">5,000 m² · Demonstration mode</small></div></div>
+        <div class="dash-id"><svg width="30" height="30"><use href="#logo"/></svg><div><strong>Main Building</strong><small id="dashArea">5,000 m² · Demonstration mode</small></div></div>
         <div class="tabs" role="tablist">
           <button role="tab" class="tab" data-tab="overview" aria-selected="true">Overview</button>
           <button role="tab" class="tab" data-tab="campus" aria-selected="false">Campus</button>
@@ -126,7 +126,7 @@
           <div class="kpi"><span>Data completeness</span><b>98.6%</b><small>Received ÷ expected readings</small></div>
           <div class="kpi"><span>Meters online</span><b>11 of 12</b><small>1 meter flagged stale</small></div>
         </div>
-        <div class="panel"><div class="ph"><h3>Consumption by zone</h3><span class="pill warn">Illustrative split</span></div><div id="zones"></div></div>
+        <div class="panel"><div class="ph"><h3>Consumption by zone</h3><span class="pill warn">Illustrative split</span></div><div id="zones"></div><p class="hint">Zone shares are an illustrative split. In the proposed system they would come from sub-meters mapped to BIM zones.</p></div>
         <div class="panel"><div class="ph"><h3>Monthly energy report</h3>
           <div class="acts"><button class="btn sm ghost-d" id="exportCsv">Export CSV</button><button class="btn sm ghost-d" id="printBtn">Print</button></div></div>
           <div class="rep"><div><small>Period</small><b id="repMonth">—</b></div><div><small>Energy</small><b id="repEnergy">—</b></div><div><small>Cost</small><b id="repBill">—</b></div><div><small>EUI</small><b id="repEUI">—</b></div></div>
@@ -137,7 +137,7 @@
       <div id="pane-campus" class="pane" hidden>
         <div class="kpis four" id="campusStats"></div>
         <div class="panel"><div class="ph"><h3>Building performance</h3><span class="pill warn">Sample data</span></div><div id="bldgs" class="bldgs"></div></div>
-        <div class="panel"><h3>Campus insights</h3><div id="insights" class="ins"></div><div class="action"><b>Recommended action</b><p id="action"></p></div></div>
+        <div class="panel"><h3>Campus insights</h3><div id="insights" class="ins"></div><div class="action"><b>Recommended action</b><p id="action"></p></div><p class="hint">Flags are prompts for inspection by qualified personnel. A flag is not automatically a saving.</p></div>
       </div>
 
       <div id="pane-forecast" class="pane" hidden>
@@ -146,7 +146,7 @@
           <div id="vchart" class="vchart"></div>
           <div class="legend"><span><i class="sw"></i>History</span><span><i class="sw f"></i>Projection</span></div></div>
         <div class="panel"><h3>Projection table</h3><div class="scroll"><table><thead><tr><th>Month</th><th>Projected consumption</th><th>Estimated cost</th></tr></thead><tbody id="ftable"></tbody></table></div>
-          <p class="hint">Linear trend of the six simulated months. Actual results depend on occupancy, weather, equipment and schedules.</p></div>
+          <p class="hint">History is simulated and scaled to the consumption you entered. The projection is a simple linear trend; real results depend on occupancy, weather, equipment and schedules. It is not a savings or accuracy claim.</p></div>
       </div>
     </div>
   </div>
@@ -205,6 +205,18 @@
       <div class="plan"><h3>Premium</h3><p class="price">₱25,000<small>/month</small></p><ul><li>Broader monitoring coverage</li><li>Enhanced analytics</li><li>Priority support</li><li>Detailed reporting</li></ul></div>
     </div>
     <p class="hint">Setup, audits, consulting and maintenance are quoted separately.</p>
+  </div>
+</section>
+
+<section id="finance">
+  <div class="wrap">
+    <h2>Preliminary financial outlook</h2>
+    <p class="sub">Planning assumptions from our project paper, not supplier quotations or guaranteed results. They will be revised after pilot testing and willingness-to-pay research.</p>
+    <div class="plans">
+      <div class="plan"><h3>Startup capital</h3><p class="price">₱2,400,000</p><p class="muted">Software, IoT meters, BIM licenses, equipment, cloud setup, legal, marketing, personnel and working capital.</p></div>
+      <div class="plan"><h3>Base scenario, per month</h3><p class="price">₱105,000</p><p class="muted">₱340,000 revenue less ₱235,000 operating expenses, from ten Standard subscriptions plus project services. Before tax and financing.</p></div>
+      <div class="plan"><h3>Break-even</h3><p class="price">14 schools</p><p class="muted">₱195,000 fixed costs ÷ ₱14,000 contribution per subscription (₱18,000 less ₱4,000), using subscriptions alone.</p></div>
+    </div>
   </div>
 </section>
 

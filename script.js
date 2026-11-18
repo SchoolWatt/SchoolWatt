@@ -15,8 +15,10 @@ const BUILDINGS = [
   { name: 'Library', area: 1000, use: 3500, bill: 52500 }
 ];
 const HISTORY = [10500, 10800, 11000, 11400, 11700, 12000];
-const DEMO = { area: 5000, usage: 12000, rate: 12 };
+const DEMO = { area: 5000, usage: 20000, rate: 15 }; // matches the Main Building on the Campus tab
 const state = { ...DEMO };
+// Campus data: the Main Building follows the calculator; every bill uses the current rate
+const campusData = () => BUILDINGS.map((b, i) => i === 0 ? { ...b, area: state.area, use: state.usage, bill: state.usage * state.rate } : { ...b, bill: b.use * state.rate });
 
 // ---------- helpers ----------
 const grow = root => requestAnimationFrame(() => requestAnimationFrame(() =>
@@ -55,7 +57,7 @@ function renderOverview() {
 
 // ---------- campus ----------
 function renderCampus() {
-  const list = BUILDINGS.map(b => ({ ...b, eui: b.use / b.area }));
+  const list = campusData().map(b => ({ ...b, eui: b.use / b.area }));
   const tUse = list.reduce((s, b) => s + b.use, 0), tBill = list.reduce((s, b) => s + b.bill, 0), tArea = list.reduce((s, b) => s + b.area, 0);
   const cEUI = tUse / tArea;
   const top = [...list].sort((a, b) => b.use - a.use)[0], worst = [...list].sort((a, b) => b.eui - a.eui)[0];
@@ -122,7 +124,7 @@ function calculate() {
   setText('rBill', php(bill)); setText('rEUI', eui.toFixed(2) + ' kWh/m²/month');
   setText('rYear', kwh(v.usage * 12)); setText('rYearCost', php(bill * 12));
   setText('rDay', kwh(v.usage / 30)); setText('rSqm', php(bill / v.area));
-  Object.assign(state, v); renderOverview(); renderForecast(); renderSavings();
+  Object.assign(state, v); renderOverview(); renderForecast(); renderSavings(); renderCampus();
   if (window.bimRefresh) window.bimRefresh();
 }
 Object.values(inputs).forEach(el => el.addEventListener('input', calculate));
